@@ -35,7 +35,16 @@ public class GameDaoMemImpl implements GameDao {
 
     @Override
     public void updateGame(Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = -1;
+        for(int i = 0;i<games.size();i++) {
+            if(games.get(i).getName().equals(game.getName())) {
+                index = i;
+            }
+        }
+        if(index != -1) {
+            games.remove(index);
+            games.add(index, game);
+        }
     }
 
     @Override

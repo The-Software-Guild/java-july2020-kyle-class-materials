@@ -22,10 +22,15 @@ public class GameDaoFileImpl implements GameDao {
     List<Game> games = new ArrayList<>();
 
     //<name>::<genre>::<publisher>::<releaseYear>
-    
     @Override
-    public Game getGameByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Game getGameByName(String name) throws GameDaoPersistanceException {
+        loadFile();
+        for (Game g : games) {
+            if (name.equals(g.getName())) {
+                return g;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -38,23 +43,44 @@ public class GameDaoFileImpl implements GameDao {
     public Game addGame(Game game) throws GameDaoPersistanceException {
         try {
             loadFile();
-        } catch(GameDaoPersistanceException ex) {
+        } catch (GameDaoPersistanceException ex) {
             //write file will create the file
         }
         games.add(game);
         writeFile();
-        
+
         return game;
     }
 
     @Override
-    public void updateGame(Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateGame(Game game) throws GameDaoPersistanceException {
+        loadFile();
+        int index = -1;
+        for (int i = 0; i < games.size(); i++) {
+            if (games.get(i).getName().equals(game.getName())) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            games.remove(index);
+            games.add(index, game);
+        }
+        writeFile();
     }
 
     @Override
-    public void deleteGameByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteGameByName(String name) throws GameDaoPersistanceException {
+        loadFile();
+        int index = -1;
+        for (int i = 0; i < games.size(); i++) {
+            if (games.get(i).getName().equals(name)) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            games.remove(index);
+        }
+        writeFile();
     }
 
     private void loadFile() throws GameDaoPersistanceException {
@@ -71,8 +97,8 @@ public class GameDaoFileImpl implements GameDao {
             String line = sc.nextLine();
             String parts[] = line.split(DELIMITER);
             if (parts.length == 4) {
-                Game g = new Game();
-                g.setName(parts[0]);
+                Game g = new Game(parts[0]);
+//                g.setName(parts[0]);
                 g.setGenre(parts[1]);
                 g.setPublisher(parts[2]);
                 g.setReleaseYear(Integer.parseInt(parts[3]));
@@ -98,7 +124,7 @@ public class GameDaoFileImpl implements GameDao {
                     + g.getPublisher() + DELIMITER
                     + g.getReleaseYear() + "\n");
         }
-        
+
         pw.flush();
         pw.close();
     }

@@ -14,11 +14,14 @@ import java.util.List;
  * @author Kyle David Rudy
  */
 public interface GameDao {
-    Game getGameByName(String name);
+
+    Game getGameByName(String name) throws GameDaoPersistanceException;
+
     List<Game> getAllGames() throws GameDaoPersistanceException;
-    
+
     Game addGame(Game game) throws GameDaoPersistanceException;
-    
-    void updateGame(Game game);
-    void deleteGameByName(String name);
+
+    void updateGame(Game game) throws GameDaoPersistanceException;
+
+    void deleteGameByName(String name) throws GameDaoPersistanceException;
 }

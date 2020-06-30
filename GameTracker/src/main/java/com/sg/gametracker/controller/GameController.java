@@ -3,6 +3,9 @@ package com.sg.gametracker.controller;
 import com.sg.gametracker.dao.GameDao;
 import com.sg.gametracker.dao.GameDaoPersistanceException;
 import com.sg.gametracker.dto.Game;
+import com.sg.gametracker.service.GameDoesNotExistException;
+import com.sg.gametracker.service.GameService;
+import com.sg.gametracker.service.InvalidDataException;
 import com.sg.gametracker.view.GameView;
 import java.util.List;
 
@@ -12,11 +15,11 @@ import java.util.List;
  */
 public class GameController {
 
-    GameDao dao;
+    GameService service;
     GameView view;
 
-    public GameController(GameDao dao, GameView view) {
-        this.dao = dao;
+    public GameController(GameService service, GameView view) {
+        this.service = service;
         this.view = view;
     }
 
@@ -28,14 +31,14 @@ public class GameController {
             try {
                 switch (choice) {
                     case 1: //List All
-                        List<Game> games = dao.getAllGames();
+                        List<Game> games = service.getAllGames();
                         view.viewAllGames(games);
                         break;
                     case 2: //View Game
                         break;
                     case 3: //Add Game
                         Game newGame = view.getGameInfo();
-                        dao.addGame(newGame);
+                        service.addGame(newGame);
                         view.actionSuccess("added");
                         break;
                     case 4: //Update Game
@@ -47,17 +50,17 @@ public class GameController {
                         view.exitTracker();
                         System.exit(0);
                 }
-            } catch (GameDaoPersistanceException ex) {
+            } catch (GameDaoPersistanceException | GameDoesNotExistException | InvalidDataException ex) {
                 view.displayError(ex.getMessage());
             }
         }
     }
 
-    public void deleteGame() {
+    public void deleteGame() throws GameDaoPersistanceException, GameDoesNotExistException {
         String name = view.enterGameName("Delete Game");
-        Game g = dao.getGameByName(name);
+        Game g = service.getGameByName(name);
         if (g != null) {
-            dao.deleteGameByName(name);
+            service.deleteGameByName(name);
             view.actionSuccess("deleted");
         } else {
             view.actionFailure("deleted");

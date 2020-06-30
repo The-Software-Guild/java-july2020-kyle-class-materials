@@ -1,2 +1,0 @@
-Mario::Platformer::Nintendo::1983
-Sonic::Platformer::Sega::1991

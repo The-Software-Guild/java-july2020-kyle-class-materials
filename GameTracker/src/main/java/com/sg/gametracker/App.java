@@ -4,6 +4,7 @@ import com.sg.gametracker.controller.GameController;
 import com.sg.gametracker.dao.GameDao;
 import com.sg.gametracker.dao.GameDaoFileImpl;
 import com.sg.gametracker.dao.GameDaoMemImpl;
+import com.sg.gametracker.service.GameService;
 import com.sg.gametracker.view.GameView;
 import com.sg.gametracker.view.UserIO;
 import com.sg.gametracker.view.UserIOConsoleImpl;
@@ -17,8 +18,9 @@ public class App {
         
         UserIO io = new UserIOConsoleImpl();
         GameView view = new GameView(io);
-        GameDao dao = new GameDaoFileImpl();
-        GameController controller = new GameController(dao, view);
+        GameDao dao = new GameDaoMemImpl();
+        GameService service = new GameService(dao);
+        GameController controller = new GameController(service, view);
         
         controller.run();
     }

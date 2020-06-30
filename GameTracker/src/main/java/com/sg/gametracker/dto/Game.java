@@ -1,5 +1,7 @@
 package com.sg.gametracker.dto;
 
+import java.util.Objects;
+
 /**
  *
  * @author Kyle David Rudy
@@ -10,8 +12,8 @@ public class Game {
     private String publisher;
     private int releaseYear;
     
-    public Game() {
-        
+    public Game(String name) {
+        this.name = name;
     }
     
     public Game(String name, String genre, String publisher, int releaseYear) {
@@ -23,10 +25,6 @@ public class Game {
         
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getGenre() {
@@ -51,6 +49,43 @@ public class Game {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.name);
+        hash = 73 * hash + Objects.hashCode(this.genre);
+        hash = 73 * hash + Objects.hashCode(this.publisher);
+        hash = 73 * hash + this.releaseYear;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Game other = (Game) obj;
+        if (this.releaseYear != other.releaseYear) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.genre, other.genre)) {
+            return false;
+        }
+        if (!Objects.equals(this.publisher, other.publisher)) {
+            return false;
+        }
+        return true;
     }
     
     

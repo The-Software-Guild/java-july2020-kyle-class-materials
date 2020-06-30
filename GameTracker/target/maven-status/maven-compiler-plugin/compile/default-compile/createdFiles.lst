@@ -1,8 +1,8 @@
 com/sg/gametracker/controller/GameController.class
-com/sg/gametracker/view/UserIOConsoleImpl.class
-com/sg/gametracker/view/GameView.class
 com/sg/gametracker/App.class
-com/sg/gametracker/dto/Game.class
-com/sg/gametracker/dao/GameDao.class
 com/sg/gametracker/view/UserIO.class
 com/sg/gametracker/dao/GameDaoMemImpl.class
+com/sg/gametracker/view/UserIOConsoleImpl.class
+com/sg/gametracker/view/GameView.class
+com/sg/gametracker/dto/Game.class
+com/sg/gametracker/dao/GameDao.class
