@@ -19,7 +19,7 @@ public class GameDaoFileImpl implements GameDao {
     private final String FILENAME = "games.txt";
     private final String DELIMITER = "::";
 
-    List<Game> games = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
 
     //<name>::<genre>::<publisher>::<releaseYear>
     @Override
