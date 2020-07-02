@@ -49,7 +49,10 @@ public class Main {
     }
 
     public static boolean isFlush(HashSet<Card> hand) {
-        return false;
+        Set<Suit> suits = hand.stream()
+                .map(c -> c.getSuit())
+                .collect(Collectors.toSet());
+        return suits.size() == 1;
     }
 
     public static boolean isStraight(HashSet<Card> hand) {
