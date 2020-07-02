@@ -10,6 +10,7 @@ public class Main {
         d.shuffle();
         for(Card c : d.getDeck()) {
             System.out.println(c.getCardString());
+            c.rank.getVal();
         }
     }
 }
