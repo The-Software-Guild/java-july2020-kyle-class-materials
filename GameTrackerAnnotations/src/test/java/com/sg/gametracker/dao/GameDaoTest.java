@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -25,8 +26,12 @@ public class GameDaoTest {
     GameDao dao;
     
     public GameDaoTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:testApplicationContext.xml");
-        dao = ctx.getBean("dao", GameDaoFileImpl.class);
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.getEnvironment().setActiveProfiles("file");
+        appContext.scan("com.sg.gametracker");
+        appContext.refresh();
+        
+        dao = appContext.getBean("gameDaoFileImpl", GameDaoFileImpl.class);
     }
     
     @BeforeAll

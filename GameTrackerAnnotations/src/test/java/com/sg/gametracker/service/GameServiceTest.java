@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -25,8 +26,12 @@ public class GameServiceTest {
     GameService service;
 
     public GameServiceTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:testApplicationContext.xml");
-        service = ctx.getBean("service", GameService.class);
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.getEnvironment().setActiveProfiles("mock");
+        appContext.scan("com.sg.gametracker");
+        appContext.refresh();
+        
+        service = appContext.getBean("gameService", GameService.class);
     }
 
     @BeforeAll
