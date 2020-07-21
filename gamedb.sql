@@ -21,9 +21,7 @@ create table game(
     releaseYear int,
     publisherId int,
     genre varchar(50),
-    parentGameId int,
-    constraint foreign key (publisherId) references publisher(id),
-    constraint foreign key (parentGameId) references game(id)
+    constraint foreign key (publisherId) references publisher(id)
 );
 
 
