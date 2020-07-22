@@ -199,3 +199,5 @@ $RECYCLE.BIN/
 /GameTrackerJDBC/target/
 /GameTrackerJDBCTemplate/target/
 /AdvancedGameTrackerJDBCTemplate/target/
+/SpringBootExample/target/
+/GameTrackerWebService/target/
