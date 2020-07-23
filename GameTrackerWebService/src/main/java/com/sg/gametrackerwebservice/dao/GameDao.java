@@ -13,9 +13,9 @@ import java.util.List;
  * @author Kyle David Rudy
  */
 public interface GameDao {
-    Game getGameById(int id);
-    List<Game> getAllGames();
-    Game addGame(Game game);
-    void updateGame(Game game);
-    void deleteGameById(int id);
+    Game getGameById(int id) throws GameDaoPersistanceException;
+    List<Game> getAllGames() throws GameDaoPersistanceException;
+    Game addGame(Game game) throws GameDaoPersistanceException;
+    void updateGame(Game game) throws GameDaoPersistanceException;
+    void deleteGameById(int id) throws GameDaoPersistanceException;
 }

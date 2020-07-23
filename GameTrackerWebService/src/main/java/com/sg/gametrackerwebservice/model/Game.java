@@ -5,7 +5,7 @@ package com.sg.gametrackerwebservice.model;
  * @author Kyle David Rudy
  */
 public class Game {
-private int id;
+    private int id;
     private String name;
     private String genre;
     private int releaseYear;

@@ -3,6 +3,7 @@ package com.sg.gametrackerwebservice.dao;
 import com.sg.gametrackerwebservice.model.Game;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author Kyle David Rudy
  */
 @Repository
+@Profile("mem")
 public class GameDaoMemImpl implements GameDao {
     
     List<Game> games = new ArrayList<>();
