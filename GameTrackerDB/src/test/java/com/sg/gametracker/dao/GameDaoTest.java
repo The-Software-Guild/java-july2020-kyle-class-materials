@@ -5,52 +5,63 @@
  */
 package com.sg.gametracker.dao;
 
+import com.sg.gametracker.App;
+import com.sg.gametracker.TestConfiguration;
 import com.sg.gametracker.dto.Game;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Kyle David Rudy
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = TestConfiguration.class)
+@ActiveProfiles("jdbctemplate")
 public class GameDaoTest {
     
+    @Autowired
     GameDao dao;
     
+    @Autowired
+    JdbcTemplate jdbc;
+    
     public GameDaoTest() {
-        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
-        appContext.getEnvironment().setActiveProfiles("file");
-        appContext.scan("com.sg.gametracker");
-        appContext.refresh();
-        
-        dao = appContext.getBean("gameDaoFileImpl", GameDaoFileImpl.class);
+
     }
     
-    @BeforeAll
+    @BeforeClass
     public static void setUpClass() {
     }
     
-    @AfterAll
+    @AfterClass
     public static void tearDownClass() {
     }
     
-    @BeforeEach
+    @Before
     public void setUp() throws GameDaoPersistanceException {
-        List<Game> games = dao.getAllGames();
-        for(Game g : games) {
-            dao.deleteGameByName(g.getName());
-        }
+//        List<Game> games = dao.getAllGames();
+//        for(Game g : games) {
+//            dao.deleteGameByName(g.getName());
+//        }
+        jdbc.update("DELETE FROM game");
     }
     
-    @AfterEach
+    @After
     public void tearDown() {
     }
 

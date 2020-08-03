@@ -5,48 +5,53 @@
  */
 package com.sg.gametracker.service;
 
+import com.sg.gametracker.TestConfiguration;
 import com.sg.gametracker.dao.GameDaoMock;
 import com.sg.gametracker.dto.Game;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Kyle David Rudy
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = TestConfiguration.class)
+@ActiveProfiles("mock")
 public class GameServiceTest {
 
+    @Autowired
     GameService service;
 
     public GameServiceTest() {
-        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
-        appContext.getEnvironment().setActiveProfiles("mock");
-        appContext.scan("com.sg.gametracker");
-        appContext.refresh();
-        
-        service = appContext.getBean("gameService", GameService.class);
+
     }
 
-    @BeforeAll
+    @BeforeClass
     public static void setUpClass() {
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDownClass() {
     }
 
-    @BeforeEach
+    @Before
     public void setUp() {
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
     }
 
