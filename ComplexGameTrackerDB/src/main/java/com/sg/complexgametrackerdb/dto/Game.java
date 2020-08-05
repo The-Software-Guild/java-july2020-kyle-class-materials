@@ -13,21 +13,19 @@ public class Game {
     private int releaseYear;
     private String genre;
     private Publisher publisher;
-    private List<Platform> platforms;
+    private List<GamePlatform> gamePlatforms;
 
     public Game() {
     }
 
-    public Game(int id, String name, int releaseYear, String genre, Publisher publisher, List<Platform> platforms) {
+    public Game(int id, String name, int releaseYear, String genre, Publisher publisher, List<GamePlatform> gamePlatforms) {
         this.id = id;
         this.name = name;
         this.releaseYear = releaseYear;
         this.genre = genre;
         this.publisher = publisher;
-        this.platforms = platforms;
+        this.gamePlatforms = gamePlatforms;
     }
-
-
 
     public int getId() {
         return id;
@@ -61,13 +59,15 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public List<Platform> getPlatforms() {
-        return platforms;
+    public List<GamePlatform> getGamePlatforms() {
+        return gamePlatforms;
     }
 
-    public void setPlatforms(List<Platform> platforms) {
-        this.platforms = platforms;
+    public void setGamePlatforms(List<GamePlatform> gamePlatforms) {
+        this.gamePlatforms = gamePlatforms;
     }
+
+
 
     public String getGenre() {
         return genre;
@@ -80,12 +80,12 @@ public class Game {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + this.releaseYear;
-        hash = 59 * hash + Objects.hashCode(this.genre);
-        hash = 59 * hash + Objects.hashCode(this.publisher);
-        hash = 59 * hash + Objects.hashCode(this.platforms);
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.name);
+        hash = 43 * hash + this.releaseYear;
+        hash = 43 * hash + Objects.hashCode(this.genre);
+        hash = 43 * hash + Objects.hashCode(this.publisher);
+        hash = 43 * hash + Objects.hashCode(this.gamePlatforms);
         return hash;
     }
 
@@ -116,14 +116,10 @@ public class Game {
         if (!Objects.equals(this.publisher, other.publisher)) {
             return false;
         }
-        if (!Objects.equals(this.platforms, other.platforms)) {
+        if (!Objects.equals(this.gamePlatforms, other.gamePlatforms)) {
             return false;
         }
         return true;
     }
 
-    
-    
-    
-    
 }
