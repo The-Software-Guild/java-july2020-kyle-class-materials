@@ -104,7 +104,7 @@ public class PlatformDaoDBTest {
         g.setName("Test Name");
         g.setGenre("test genre");
         g.setReleaseYear(1980);
-        g.setPlatforms(platforms.getAllPlatforms());
+//        g.setPlatforms(platforms.getAllPlatforms());
         
         games.addGame(g);
         

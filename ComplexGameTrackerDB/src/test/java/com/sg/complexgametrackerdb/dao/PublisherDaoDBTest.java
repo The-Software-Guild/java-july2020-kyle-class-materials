@@ -111,7 +111,7 @@ public class PublisherDaoDBTest {
         g.setGenre("Test genre");
         g.setReleaseYear(1980);
         g.setPublisher(p);
-        g.setPlatforms(platforms.getAllPlatforms());
+//        g.setPlatforms(platforms.getAllPlatforms());
         g = games.addGame(g);
         
         Publisher fromDao = publishers.getPublisherById(p.getId());

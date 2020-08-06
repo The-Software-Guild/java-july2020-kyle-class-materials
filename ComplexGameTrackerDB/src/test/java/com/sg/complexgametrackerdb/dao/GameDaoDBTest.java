@@ -7,8 +7,10 @@ package com.sg.complexgametrackerdb.dao;
 
 import com.sg.complexgametrackerdb.TestConfiguration;
 import com.sg.complexgametrackerdb.dto.Game;
+import com.sg.complexgametrackerdb.dto.GamePlatform;
 import com.sg.complexgametrackerdb.dto.Platform;
 import com.sg.complexgametrackerdb.dto.Publisher;
+import java.math.BigDecimal;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,6 +39,9 @@ public class GameDaoDBTest {
 
     @Autowired
     PublisherDao publishers;
+    
+    @Autowired
+    GamePlatformDao gamePlatforms;
 
     @Autowired
     JdbcTemplate jdbc;
@@ -93,18 +98,19 @@ public class GameDaoDBTest {
         Publisher p = new Publisher();
         p.setPublisher("Test Pub");
         p.setCountry("Test Country");
-        p = publishers.addPublisher(p);
+        p = publishers.addPublisher(p);        
+        
         
         Platform plat = new Platform();
         plat.setPlatform("Test Plat");
         plat = platforms.addPlatform(plat);
-        
+               
         Game g = new Game();
         g.setName("Test Game");
         g.setGenre("Test genre");
         g.setReleaseYear(1980);
         g.setPublisher(p);
-        g.setPlatforms(platforms.getAllPlatforms());
+//        g.setPlatforms(platforms.getAllPlatforms());
         g = games.addGame(g);
         
         Game fromDao = games.getGameById(g.getId());
@@ -117,7 +123,7 @@ public class GameDaoDBTest {
         plat2.setPlatform("Test Plat Again");
         plat2 = platforms.addPlatform(plat2);
         
-        g.setPlatforms(platforms.getAllPlatforms());
+//        g.setPlatforms(platforms.getAllPlatforms());
         
         games.updateGame(g);
         
