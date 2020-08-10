@@ -28,7 +28,6 @@ create table game(
 CrEaTe table game_platform (
 	gameId int,
     platformId int,
-    price DECIMAL(5,2),
     primary key(gameId, platformId),
     constraint foreign key (gameId) references game(id),
     constraint foreign key (platformId) references platform(id)
